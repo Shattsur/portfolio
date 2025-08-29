@@ -1,3 +1,13 @@
-data
+
 .env
 test.sql
+# Allow DVC metafiles (do not track large data, but track .dvc descriptors)
+!data/**/*.dvc
+# Ignore raw data and virtualenv
+data/
+local_data/
+venv*/
+__pycache__/
+*.pyc
+# But allow .dvc metafiles
+!data/
