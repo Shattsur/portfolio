@@ -11,3 +11,8 @@ __pycache__/
 *.pyc
 # But allow .dvc metafiles
 !data/
+
+db_source/
+db_destination/
+airflow/logs/
+airflow/db_destination/

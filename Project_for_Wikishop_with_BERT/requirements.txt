@@ -1,0 +1,32 @@
+# Data manipulation and analysis
+numpy
+pandas
+
+# Visualization
+seaborn
+matplotlib
+wordcloud
+
+# Machine Learning
+scikit-learn
+lightgbm
+
+# NLP and text processing
+nltk
+swifter
+
+# Deep Learning
+torch
+torchvision
+torchaudio
+
+# Transformers and BERT
+transformers
+
+# Utilities
+tqdm
+scipy
+
+# Jupyter support
+jupyter
+ipykernel
