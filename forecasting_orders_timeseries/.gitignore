@@ -12,7 +12,8 @@ __pycache__/
 # But allow .dvc metafiles
 !data/
 
-db_source/
+db_source/taxi.csv
+!db_source/taxi.csv.dvc
 db_destination/
 airflow/logs/
 airflow/db_destination/
