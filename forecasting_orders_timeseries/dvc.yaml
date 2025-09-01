@@ -1,0 +1,7 @@
+stages:
+  features:
+    desc: "Фичи для прогноза заказов такси"
+    deps:
+      - db_source/taxi.csv
+    outs:
+      - db_destination/taxi_features.csv
