@@ -14,6 +14,7 @@ __pycache__/
 
 db_source/taxi.csv
 !db_source/taxi.csv.dvc
-db_destination/
+db_destination/taxi_features.csv
+!db_destination/taxi_features.csv.dvc
 airflow/logs/
 airflow/db_destination/
