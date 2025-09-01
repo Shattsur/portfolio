@@ -1,0 +1,16 @@
+schema: '2.0'
+stages:
+  features:
+    cmd: powershell -Command "if (-Not (Test-Path 
+      db_destination/taxi_features.csv)) { '' | Out-File 
+      db_destination/taxi_features.csv }"
+    deps:
+    - path: db_source/taxi.csv
+      hash: md5
+      md5: 160b948c59f37db3000a1987591ab31f
+      size: 626805
+    outs:
+    - path: db_destination/taxi_features.csv
+      hash: md5
+      md5: bea07e6d2b8dce396fe21baa61b34956
+      size: 6

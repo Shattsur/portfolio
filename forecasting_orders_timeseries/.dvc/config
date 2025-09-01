@@ -1,0 +1,4 @@
+[core]
+    remote = local
+['remote "local"']
+    url = C:\Files\Infra\dvc_storage
