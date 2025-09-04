@@ -4,7 +4,7 @@
 
 Создайте файл `airflow/.env` со следующим содержимым:
 
-```
+```env
 SOURCE_PATH=/opt/airflow/db_source/taxi.csv
 DEST_PATH=/opt/airflow/db_destination/taxi_features.csv
 ```
@@ -32,38 +32,56 @@ services:
 
 ---
 
-## Шаг 3 — Сборка и запуск контейнеров
+## Шаг 3 — Инициализация Airflow
 
-Выполните в директории `airflow/`:
+Перед первым запуском выполните инициализацию БД и создание пользователя:
 
-```powershell
+```sh
 cd airflow
-docker-compose up --build -d
+docker compose up airflow-init
+```
+
+Контейнер `airflow-init` отработает и завершится автоматически.
+
+Второй командой разработчики Airflow советуют очистить возможный кэш, который появился в результате первого шага. Если этого не сделать, то могут возникнуть непредвиденные ошибки.
+
+```sh
+docker compose down --volumes --remove-orphans 
+```
+---
+
+## Шаг 4 — Сборка и запуск контейнеров
+
+Запустите основной стек сервисов:
+
+```sh
+docker compose up --build -d
 ```
 
 Airflow поднимет следующие сервисы:
 
-- webserver (UI: http://localhost:8080)
-- scheduler
-- postgres
-- другие вспомогательные контейнеры
+- **webserver** (UI: [http://localhost:8080](http://localhost:8080))
+- **scheduler**
+- **postgres**
+- **redis** и другие вспомогательные контейнеры
+
+> ⚡ **Совет:** Используйте `--build` только если изменяли `Dockerfile` или `requirements.txt`.  
+> В остальных случаях достаточно `docker compose up -d`.
 
 ---
 
-## Шаг 4 — Доступ в интерфейс
+## Шаг 5 — Доступ в интерфейс
 
 Перейдите в браузере по адресу: [http://localhost:8080](http://localhost:8080)
 
 Логин/пароль по умолчанию (или из переменных окружения):
 
-```
-login: airflow
-password: airflow
-```
+- **login:** `airflow`
+- **password:** `airflow`
 
 ---
 
-## Шаг 5 — Запуск DAG
+## Шаг 6 — Запуск DAG
 
 1. Найдите DAG с именем `air_etl` в интерфейсе Airflow.
 2. Включите тумблер (Activate DAG).
@@ -77,10 +95,26 @@ Airflow выполнит три задачи:
 
 ---
 
-## Шаг 6 — Проверка результатов
+## Шаг 7 — Проверка результатов
 
 После выполнения DAG в папке `db_destination` появится обновлённый файл:
 
 ```
 db_destination/taxi_features.csv
+```
+
+---
+
+## Шаг 8 — Остановка Airflow
+
+Чтобы остановить все контейнеры Airflow:
+
+```sh
+docker compose down
+```
+
+С очисткой volume
+
+```sh
+docker compose down -v
 ```

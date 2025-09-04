@@ -160,8 +160,6 @@ services:
     <<: *airflow-common
     command: >
       bash -c "
-      chown -R airflow:root /opt/airflow/db_destination &&
-      chmod -R 775 /opt/airflow/db_destination &&
       exec /entrypoint airflow celery worker
       "
     healthcheck:

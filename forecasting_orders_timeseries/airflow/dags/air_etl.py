@@ -24,7 +24,7 @@ def extract(**context):
 
     # Пытаемся автоматически определить разделитель
     try:
-        df = pd.read_csv(src, sep=None, engine="python")
+        df = pd.read_csv(src, sep=',', engine="python")
     except Exception:
         # fallback на запятую
         df = pd.read_csv(src)

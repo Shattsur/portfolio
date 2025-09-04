@@ -12,5 +12,5 @@ stages:
     outs:
     - path: db_destination/taxi_features.csv
       hash: md5
-      md5: bea07e6d2b8dce396fe21baa61b34956
-      size: 6
+      md5: bcfd9ce57c065debdf0e44277c3909a5
+      size: 327218

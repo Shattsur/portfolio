@@ -18,3 +18,4 @@ db_destination/taxi_features.csv
 !db_destination/taxi_features.csv.dvc
 airflow/logs/
 airflow/db_destination/
+mlflow/artifacts/
