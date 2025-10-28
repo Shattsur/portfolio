@@ -1,0 +1,80 @@
+{
+  "title": "RecSys Production Monitoring",
+  "tags": ["recsys", "production"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "API Requests Rate",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "rate(api_requests_total[5m])",
+          "legendFormat": "{{method}} {{endpoint}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Model Predictions Rate", 
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "rate(model_predictions_total[5m])",
+          "legendFormat": "{{status}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Prediction Latency",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(model_prediction_duration_seconds_bucket[5m]))",
+          "legendFormat": "95th percentile",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Success Rate",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 16},
+      "targets": [
+        {
+          "expr": "rate(model_predictions_total{status=\"success\"}[5m]) / rate(model_predictions_total[5m])",
+          "legendFormat": "Success Rate", 
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Model Load Status",
+      "type": "stat", 
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 16},
+      "targets": [
+        {
+          "expr": "model_load_status",
+          "legendFormat": "Status",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "10s",
+  "schemaVersion": 35,
+  "version": 0,
+  "uid": "recsys-production"
+}
