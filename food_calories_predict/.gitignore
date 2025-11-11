@@ -1,0 +1,8 @@
+.env
+data/*
+!data/README.md
+envs/*
+*.pth
+*.pkl
+*.model
+.ipynb_checkpoints
